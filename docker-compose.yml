@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: taxko_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: spring_backend
+    ports:
+      - "9090:9090"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/taxko_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - JWT_SECRET=819ff410-3a21-47a7-8a8a-2f2d92dfb644
+      - JWT_EXPIRATION=86400000
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: react_frontend
+    ports:
+      - "3000:80"
