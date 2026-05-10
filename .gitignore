@@ -55,3 +55,15 @@ build/
 
 # Google credentials
 backend/src/main/resources/*.json
+
+#aws
+*.pem
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/terraform.tfvars
+
+# Ansible
+ansible/inventory.ini
