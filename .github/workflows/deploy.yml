@@ -30,7 +30,9 @@ jobs:
 
       - name: Terraform Apply
         working-directory: terraform
-        run: terraform apply -auto-approve
+        run: |
+          terraform apply -auto-approve \
+            -var="key_name=devops-key"
 
       - name: Get EC2 Public IP
         id: tf-output
